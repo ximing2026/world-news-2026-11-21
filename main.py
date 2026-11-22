@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Place a copy of the bundled poster at /output/entry.png.
+"""Deliver the poster image to /output/entry.png.
 
-The artwork ships in this repository as entry.png, in the same folder
-as this script. Running the program copies it to the location the
-bounty harness reads from, creating the output folder first when it is
-missing.
+This repository ships its artwork as a file named entry.png sitting
+beside this script. Executing the program copies that file to the
+output path, making the /output directory first if it is absent,
+and reports what it did.
 """
 
 import shutil
@@ -13,37 +13,34 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 SOURCE = HERE / "entry.png"
-DEST_DIR = Path("/output")
-DEST = DEST_DIR / "entry.png"
+DEST = Path("/output") / "entry.png"
 
-PNG_SIGNATURE = bytes([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A])
-SIZE_LIMIT = 1048576  # 1 MiB
+PNG_HEADER = b"\x89PNG\r\n\x1a\n"
+MAX_BYTES = 1048576  # 1 MiB
 
 
-def guard(source: Path) -> None:
-    """Exit with an error unless source is a PNG no larger than 1 MiB."""
-    size = source.stat().st_size
-    if size > SIZE_LIMIT:
+def check_source(path: Path) -> None:
+    """Abort unless path is a genuine PNG of at most 1 MiB."""
+    size = path.stat().st_size
+    if size > MAX_BYTES:
         sys.exit(
-            f"error: {source.name} is {size} bytes, "
-            f"which exceeds the 1 MiB limit of {SIZE_LIMIT} bytes"
+            f"error: {path.name} weighs {size} bytes, "
+            f"over the 1 MiB ceiling of {MAX_BYTES} bytes"
         )
-    with source.open("rb") as handle:
-        opening = handle.read(len(PNG_SIGNATURE))
-    if opening != PNG_SIGNATURE:
-        sys.exit(f"error: {source.name} does not begin with the PNG magic bytes")
+    with path.open("rb") as handle:
+        head = handle.read(len(PNG_HEADER))
+    if head != PNG_HEADER:
+        sys.exit(f"error: {path.name} lacks the PNG magic bytes at its start")
 
 
 def main() -> int:
     if not SOURCE.is_file():
-        print(f"error: source image not found: {SOURCE}", file=sys.stderr)
+        print(f"error: cannot find the bundled image at {SOURCE}", file=sys.stderr)
         return 1
-
-    guard(SOURCE)
-
-    DEST_DIR.mkdir(parents=True, exist_ok=True)
+    check_source(SOURCE)
+    DEST.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(SOURCE, DEST)
-    print(f"Done: copied {SOURCE.name} to {DEST}")
+    print(f"copied {SOURCE} -> {DEST} ({DEST.stat().st_size} bytes)")
     return 0
 
 
