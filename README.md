@@ -1,21 +1,19 @@
-# One Day in One Picture — The World News of Saturday 21 November 2026
+# The World of Saturday 21 November 2026, in a Single Picture
 
-This project squeezes an entire day of world news into a single image, laid out like the front page of a newspaper. The lead story reports two tankers struck by unknown projectiles off the coast of Oman, near the entrance to the Strait of Hormuz. Around it sit 32 stories in total: six illustrated cards covering a missile strike on Kryvyi Rih in Ukraine, a powerful earthquake in Peru, a researcher's still-unverified claim — made with help from an AI assistant — to have cracked the Riemann hypothesis, the COP31 climate talks stuck in deadlock over fossil fuels, Denmark breaking up an alleged Russian assassination plot, and the Nasdaq giving back all of its gains for 2026. Shorter regional briefs fill the columns below the cards, a "day in numbers" strip pulls out the figures that mattered most, and a news ticker runs along the bottom with the rest of the day's headlines.
+This entry packs one full day of world news into a single image styled as a newspaper front page. The headline slot goes to the two tankers hit by unknown projectiles in the waters off Oman, close to the Strait of Hormuz. Altogether the page carries 32 stories: six picture cards — the missile strike on Kryvyi Rih in Ukraine, a strong earthquake in Peru, a researcher's unverified claim (arrived at with an AI assistant's help) of a breakthrough on the Riemann hypothesis, the COP31 climate talks deadlocked over fossil fuels, Denmark foiling an alleged Russian assassination plot, and the Nasdaq surrendering its 2026 gains — backed up by shorter regional briefs, a "day in numbers" strip, and a scrolling-style news ticker along the foot of the page.
 
 ## Run it
-
-Run the program with Python 3:
 
 ```bash
 python3 main.py
 ```
 
-It writes the poster to `/output/entry.png`, creating the directory if needed. Before copying, it checks that the bundled image really is a PNG and no larger than 1 MiB. The program relies only on the Python standard library, so there is nothing to install.
+That writes the poster to `/output/entry.png`, creating the folder if it does not already exist. On the way, the script checks that the bundled artwork really is a PNG and no bigger than 1 MiB. Nothing beyond the Python 3 standard library is needed.
 
 ## Badges
 
-![make.fun bounty](https://make.fun/badge/news-image-20261121.svg)
-![rank](https://make.fun/badge/news-image-20261121/ximing2026/world-news-2026-11-21/rank.svg)
-![reward](https://make.fun/badge/news-image-20261121/ximing2026/world-news-2026-11-21/reward.svg)
+[![make.fun bounty](https://make.fun/badge/news-image-20261121.svg)](https://make.fun/bounty/news-image-20261121)
+[![rank](https://make.fun/badge/news-image-20261121/ximing2026/world-news-2026-11-21/rank.svg)](https://make.fun/bounty/news-image-20261121/leaderboard)
+[![reward](https://make.fun/badge/news-image-20261121/ximing2026/world-news-2026-11-21/reward.svg)](https://make.fun/bounty/news-image-20261121)
 
-Want to enter a bounty like this one yourself? Give make.fun a try: https://make.fun/r/sz0e39g7
+Fancy building something for a bounty yourself? Try make.fun here: https://make.fun/r/sz0e39g7
